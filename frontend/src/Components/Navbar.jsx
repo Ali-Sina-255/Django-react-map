@@ -13,14 +13,14 @@ const useStyles = makeStyles({
   },
 
   AddPro: {
-    backgroundColor: "green",
-    color: "withe",
+    backgroundColor: "#FFE700",
+    color: "black",
     width: "15rem",
     fontSize: "1.1rem",
     marginRight: "1rem",
     borderRadius: "4px",
     "&:hover": {
-      backgroundColor: "blue",
+      backgroundColor: "#FFF100",
     },
   },
   logBtn: {
@@ -31,7 +31,7 @@ const useStyles = makeStyles({
     marginLight: "1rem",
     borderRadius: "4px",
     "&:hover": {
-      backgroundColor: "green",
+      backgroundColor: "#FFF100",
     },
   },
 });
