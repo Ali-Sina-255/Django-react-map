@@ -7,4 +7,6 @@ const data = [
   { id: 6, name: "Avocado", color: "green" },
 ];
 
-export default data
+export default data;
+
+// https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}'
