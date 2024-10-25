@@ -1,5 +1,10 @@
-function Listings() {
-  return <div>Listing page</div>;
-}
+import {
+  MapContainer,
+  TileLayer,
+  useMap,
+} from "https://cdn.esm.sh/react-leaflet";
 
-export default Listings;
+function Listing() {
+  return <h1>This is listing page </h1>;
+}
+export default Listing;

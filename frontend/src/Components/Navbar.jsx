@@ -1,71 +1,83 @@
-import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, AppBar, Toolbar, Typography } from "@mui/material";
+import { Button, Typography, AppBar, Toolbar } from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
 import { makeStyles } from "@mui/styles";
+
 const useStyles = makeStyles({
   leftNav: {
     marginRight: "auto",
   },
   rightNav: {
     marginLeft: "auto",
-    marginLeft: "10rem",
+    marginRight: "6rem",
   },
 
-  addProperty: {
+  AddPro: {
     backgroundColor: "green",
-    color: "white",
-    width: "10rem",
-    padding: "8px",
-    borderRadius: "15px",
+    color: "withe",
+    width: "15rem",
+    fontSize: "1.1rem",
+    marginRight: "1rem",
+    borderRadius: "4px",
+    "&:hover": {
+      backgroundColor: "blue",
+    },
   },
-  loginBtn: {
-    marginLeft: "auto",
+  logBtn: {
     backgroundColor: "white",
     color: "black",
-    width: "10rem",
-    padding: "8px",
-    borderRadius: "15px",
-    outline: "none",
+    width: "15rem",
+    fontSize: "1.1rem",
+    marginLight: "1rem",
+    borderRadius: "4px",
     "&:hover": {
-      backgroundColor: "#08C2FF",
+      backgroundColor: "green",
     },
   },
 });
 
-export const NavbarBar = () => {
-  const [btnColor, setBtnColor] = useState("error");
+export default function NavBar() {
   const classes = useStyles();
   const navigate = useNavigate();
   return (
-    <div>
-      <AppBar position="static" style={{ backgroundColor: "#257180" }}>
+    <>
+      <CssBaseline />
+      <AppBar position="static" style={{ backgroundColor: "#088395" }}>
         <Toolbar>
           <div className={classes.leftNav}>
             <Button color="inherit" onClick={() => navigate("/")}>
-              <Typography variant="h4">LBERP</Typography>
+              <Typography variant="h4">LBREP</Typography>
             </Button>
           </div>
           <div>
-            <Button color="inherit" onClick={() => navigate("listing")}>
+            <Button
+              color="inherit"
+              style={{ marginRight: "2rem" }}
+              onClick={() => navigate("/listing")}
+            >
               <Typography variant="h6">Listing</Typography>
             </Button>
             <Button color="inherit">
-              <Typography variant="h6">Agencies</Typography>
+              <Typography variant="h6" style={{ marginLeft: "2rem" }}>
+                Agencies
+              </Typography>
             </Button>
           </div>
           <div className={classes.rightNav}>
             <Button color="inherit">
-              <Typography className={classes.addProperty}>
+              {" "}
+              <Typography className={classes.AddPro} variant="h6">
                 Add Property
               </Typography>
             </Button>
-
-            <Button color="inherit" onClick={() => navigate("login")}>
-              <Typography className={classes.loginBtn}>Login</Typography>
+            <Button color="inherit" onClick={() => navigate("/login")}>
+              <Typography variant="h6" className={classes.logBtn}>
+                Login
+              </Typography>
             </Button>
           </div>
         </Toolbar>
       </AppBar>
-    </div>
+    </>
   );
-};
+}
