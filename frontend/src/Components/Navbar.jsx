@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button, AppBar, Toolbar, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles({
@@ -25,23 +26,27 @@ const useStyles = makeStyles({
     padding: "8px",
     borderRadius: "15px",
     outline: "none",
+    "&:hover": {
+      backgroundColor: "#08C2FF",
+    },
   },
 });
 
 export const NavbarBar = () => {
   const [btnColor, setBtnColor] = useState("error");
   const classes = useStyles();
+  const navigate = useNavigate();
   return (
     <div>
-      <AppBar position="static">
+      <AppBar position="static" style={{ backgroundColor: "#257180" }}>
         <Toolbar>
           <div className={classes.leftNav}>
-            <Button color="inherit">
+            <Button color="inherit" onClick={() => navigate("/")}>
               <Typography variant="h4">LBERP</Typography>
             </Button>
           </div>
           <div>
-            <Button color="inherit">
+            <Button color="inherit" onClick={() => navigate("listing")}>
               <Typography variant="h6">Listing</Typography>
             </Button>
             <Button color="inherit">
@@ -55,7 +60,7 @@ export const NavbarBar = () => {
               </Typography>
             </Button>
 
-            <Button color="inherit">
+            <Button color="inherit" onClick={() => navigate("login")}>
               <Typography className={classes.loginBtn}>Login</Typography>
             </Button>
           </div>

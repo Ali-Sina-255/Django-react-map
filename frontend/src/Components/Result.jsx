@@ -10,6 +10,7 @@ function Result(props) {
       setBtnColor("error");
     }
   };
+
   return (
     <>
       <Typography variant="center">
