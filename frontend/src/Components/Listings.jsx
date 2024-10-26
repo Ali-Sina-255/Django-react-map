@@ -45,9 +45,8 @@ function Listing() {
   const [longitude, setLongitude] = useState(-0.09);
 
   function goEast() {
-    // Adjust the coordinates as needed
-    setLatitude(51.505); // Example adjustment
-    setLongitude(-0.08); // Example adjustment
+    setLatitude(51.505);
+    setLongitude(-0.08);
   }
 
   function goCenter() {
@@ -68,13 +67,12 @@ function Listing() {
             center={[51.505, -0.09]}
             zoom={14}
             scrollWheelZoom={true}
-            style={{ height: "100vh", width: "100%" }} // Set the style for MapContainer
+            style={{ height: "100vh", width: "100%" }}
           >
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-
             {myListings.map((listing) => {
               function iconDisplay() {
                 if (listing.listing_type === "House") {
@@ -88,13 +86,12 @@ function Listing() {
               }
 
               return (
-                // Add return statement here
                 <Marker
                   key={listing.id}
                   icon={iconDisplay()}
                   position={[
-                    listing.location.coordinates[1], // Longitude first
-                    listing.location.coordinates[0], // Latitude second
+                    listing.location.coordinates[0],
+                    listing.location.coordinates[1],
                   ]}
                 >
                   <Popup>
@@ -117,6 +114,48 @@ function Listing() {
                 </Marker>
               );
             })}
+            {/* {myListings.map((listing) => {
+              console.log("this is working");
+              function iconDisplay() {
+                if (listing.listing_type === "House") {
+                  return houseIcon;
+                } else if (listing.listing_type === "Apartment") {
+                  return apartmentIcon;
+                } else if (listing.listing_type === "Office") {
+                  return officeIcon;
+                }
+                return null; // Ensure it returns null if no type matches
+              }
+              return (
+                // Add return statement here
+                <Marker
+                  key={listing.id}
+                  icon={iconDisplay}
+                  position={[
+                    listing.location.coordinates[1], 
+                    listing.location.coordinates[0], 
+                  ]}
+                >
+                  <Popup>
+                    <Typography variant="h5">{listing.title}</Typography>
+                    <Typography variant="body">
+                      {listing.description.substring(0, 150)}....
+                    </Typography>
+                    <img
+                      className={classes.PopupImages}
+                      src={listing.picture1}
+                      alt=""
+                    />
+                    <Button
+                      fullWidth
+                      style={{ backgroundColor: "#088395", color: "white" }}
+                    >
+                      Details
+                    </Button>
+                  </Popup>
+                </Marker>
+              );
+            })} */}
             <Marker icon={officeIcon} position={[latitude, longitude]}></Marker>
           </MapContainer>
         </AppBar>
