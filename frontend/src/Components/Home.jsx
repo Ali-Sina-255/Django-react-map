@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     fontWeight: "bolder",
   },
   homeBtn: {
-    fontSize: "3.5rem",
+    fontSize: "2rem",
     borderRadius: "15px",
     marginTop: "16px",
     boxShadow: "3px 3px 3px withe",
