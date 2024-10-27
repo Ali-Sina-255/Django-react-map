@@ -1,7 +1,16 @@
 import React, { useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
-import { Grid, AppBar, Typography, Button } from "@mui/material";
+import {
+  Grid,
+  AppBar,
+  Typography,
+  Button,
+  Card,
+  CardHeader,
+  CardMedia,
+  CardContent,
+} from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
 // Assets import
@@ -20,6 +29,27 @@ const useStyle = makeStyles({
     marginLeft: "4px",
     width: "18rem",
     marginTop: "4px",
+  },
+  cardStyle: {
+    margin: "0.5rem",
+    border: "1px solid #088395",
+    position: "relative",
+  },
+  pictureStyle: {
+    paddingRight: "1rem",
+    paddingLeft: "1rem",
+    height: "20rem",
+    width: "30rem",
+  },
+  priceOverly: {
+    position: "absolute",
+    backgroundColor: "green",
+    zIndex: "1000px",
+    color: "white",
+    top: "100px",
+    left: "20px",
+    padding: "5px",
+    borderRadius: "4px",
   },
 });
 
@@ -57,11 +87,41 @@ function Listing() {
   return (
     <Grid container>
       <Grid item xs={4}>
-        <Button onClick={goEast}>Go EAST</Button>
-        <Button onClick={goCenter}>Go Center</Button>
+        {myListings.map((listing) => {
+          return (
+            <Card key={listing.id} className={classes.cardStyle}>
+              <CardHeader title={listing.title} />
+              <CardMedia
+                component="img"
+                image={listing.picture1}
+                className={classes.pictureStyle}
+              />
+              <CardContent>
+                <Typography>
+                  <p>{listing.description.substring(0, 250)}....</p>
+                </Typography>
+                {listing.property_status === "Sale" ? (
+                  <Typography className={classes.priceOverly}>
+                    {listing.price
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    $
+                  </Typography>
+                ) : (
+                  <Typography className={classes.priceOverly}>
+                    {listing.listing_type}: $
+                    {listing.price
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
+                    / {listing.rental_frequency}
+                  </Typography>
+                )}
+              </CardContent>
+            </Card>
+          );
+        })}
       </Grid>
-
-      <Grid item xs={8}>
+      <Grid item xs={8} style={{ marginTop: "0.5rem" }}>
         <AppBar position="sticky">
           <MapContainer
             center={[51.505, -0.09]}
@@ -82,7 +142,7 @@ function Listing() {
                 } else if (listing.listing_type === "Office") {
                   return officeIcon;
                 }
-                return null; // Ensure it returns null if no type matches
+                return null;
               }
 
               return (
@@ -114,48 +174,6 @@ function Listing() {
                 </Marker>
               );
             })}
-            {/* {myListings.map((listing) => {
-              console.log("this is working");
-              function iconDisplay() {
-                if (listing.listing_type === "House") {
-                  return houseIcon;
-                } else if (listing.listing_type === "Apartment") {
-                  return apartmentIcon;
-                } else if (listing.listing_type === "Office") {
-                  return officeIcon;
-                }
-                return null; // Ensure it returns null if no type matches
-              }
-              return (
-                // Add return statement here
-                <Marker
-                  key={listing.id}
-                  icon={iconDisplay}
-                  position={[
-                    listing.location.coordinates[1], 
-                    listing.location.coordinates[0], 
-                  ]}
-                >
-                  <Popup>
-                    <Typography variant="h5">{listing.title}</Typography>
-                    <Typography variant="body">
-                      {listing.description.substring(0, 150)}....
-                    </Typography>
-                    <img
-                      className={classes.PopupImages}
-                      src={listing.picture1}
-                      alt=""
-                    />
-                    <Button
-                      fullWidth
-                      style={{ backgroundColor: "#088395", color: "white" }}
-                    >
-                      Details
-                    </Button>
-                  </Popup>
-                </Marker>
-              );
-            })} */}
             <Marker icon={officeIcon} position={[latitude, longitude]}></Marker>
           </MapContainer>
         </AppBar>
